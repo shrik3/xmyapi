@@ -17,7 +17,9 @@ class ArticleController extends Controller
 
     public function show($id){
         $result = \App\Article::find($id);
+        if($result){
         $result['front_image']=url('images/x.jpg');
+        }
         return $result;
     }
 

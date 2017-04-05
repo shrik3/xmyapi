@@ -19,6 +19,7 @@ $api = app('Dingo\Api\Routing\Router');
 $api->version('v1',function($api){
     $api->get('test/{id}','\App\Http\Controllers\TestController@show');
     $api->resource('community','\App\Http\Controllers\CommunityController');
+    $api->resource('article','\App\Http\Controllers\ArticleController');
 
 });
 

@@ -13,6 +13,7 @@ class CommunitySeeder extends Seeder
     {
         //
         DB::table('communities')->delete();
+        DB::table('articles')->delete();
 
         for ($i=0; $i < 10; $i++) {
             \App\Community::create([
@@ -21,5 +22,14 @@ class CommunitySeeder extends Seeder
             ]);
         }
 
+        $communities = \App\Community::all();
+        foreach ($communities as $community) {
+            \App\Article::create([
+                'title'   => 'Title '.$community['id'],
+                'body'    => 'Body 测试用文章内容，所有者id为： '.$community['id'],
+                'owner_id' => $community['id'],
+        ]);
+
+        }
     }
 }

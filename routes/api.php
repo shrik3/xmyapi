@@ -13,6 +13,20 @@ use Illuminate\Http\Request;
 |
 */
 
+
+$api = app('Dingo\Api\Routing\Router');
+
+$api->version('v1',function($api){
+    $api->get('test/{id}','\App\Http\Controllers\TestController@show');
+    $api->resource('community','\App\Http\Controllers\CommunityController');
+
+});
+
+
+
+/*
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+*/

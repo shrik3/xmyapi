@@ -14,11 +14,13 @@ class CreateCommunityTable extends Migration
     public function up()
     {
         //
-         $table->increments('id');
-         $table->string('name');
-         $table->string('brief');
-         $table->timestamps();
-         
+        Schema::create('communities', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('brief');
+            $table->timestamps();
+        });
+
     }
 
     /**
@@ -29,5 +31,6 @@ class CreateCommunityTable extends Migration
     public function down()
     {
         //
+        Schema::dropIfExists('communities');
     }
 }

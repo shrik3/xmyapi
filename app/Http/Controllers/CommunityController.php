@@ -9,7 +9,13 @@ class CommunityController extends Controller
     //
     public function show($id){
         $r1 = \App\Community::find($id);
-        $result = json_encode($r1);
         return $result;
     }
+
+    public function index(){
+        $result = \App\Community::all();
+        return $result;
+
+    }
+
 }

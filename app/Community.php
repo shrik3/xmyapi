@@ -8,4 +8,7 @@ class community extends Model
 {
     //
     protected $table = 'communities';
+
+    // ORM of icon
+    
 }

@@ -23,6 +23,10 @@ $api->version('v1',function($api){
         $api->resource('community','CommunityController');
         $api->resource('article','ArticleController');
 
+        // 用户相关
+        $api->post('/user/register','UserController@register');
+
+
     });
 
 

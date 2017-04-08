@@ -17,9 +17,13 @@ use Illuminate\Http\Request;
 $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1',function($api){
-    $api->get('test/{id}','\App\Http\Controllers\TestController@show');
-    $api->resource('community','\App\Http\Controllers\CommunityController');
-    $api->resource('article','\App\Http\Controllers\ArticleController');
+    $api->get('test','\App\Http\Controllers\Api\V1\UserController@test');
+    $api->resource('community','\App\Http\Controllers\Api\V1\CommunityController');
+    $api->resource('article','\App\Http\Controllers\Api\V1\ArticleController');
+
+    $api->post('/users/register','UserController@register');
+
+
 
 });
 

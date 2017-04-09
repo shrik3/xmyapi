@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateArticleTable extends Migration
+class CreatePhotoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,18 @@ class CreateArticleTable extends Migration
      */
     public function up()
     {
-        Schema::create('articles', function (Blueprint $table) {
+        //
+        Schema::create('photos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->text('body')->nullable();
+            $table->string('file_name');
+
+            $table->string('type');
             $table->integer('owner_id');
-            $table->integer('likes');
+
             $table->timestamps();
         });
+
     }
 
     /**

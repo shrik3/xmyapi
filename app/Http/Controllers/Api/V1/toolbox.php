@@ -20,4 +20,30 @@ function check_item($items,$array){
     return true;
 }
 
-$success = array("message"=>"done","status_code"=>"200");
+function get_community_icon_path($community_id){
+    $icon = \App\Photo::select('file_name')
+                    ->where([
+                        'owner_id' => $community_id,
+                        'type'     => 'CommunityIcon'
+                    ])
+                    ->first();
+    $url = url('images/'.$icon['file_name']);
+    return $url;
+}
+
+function get_comments($article_id){
+        $result =  \App\Comment::where('article_id',$article_id);
+        return $result;
+}
+
+function get_article_image_path($article_id){
+    $front_image = \App\Photo::select('file_name')
+                    ->where([
+                        'owner_id' => $article_id,
+                        'type'     => 'Poster'
+                    ])
+                    ->first();
+    $url = url('images/'.$front_image['file_name']);
+    return $url;
+
+}

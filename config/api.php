@@ -168,8 +168,10 @@ return [
     |
     */
 
-    'auth' => [
+    // THIS IS A CUSTOM JWT CONFIG
 
+    'auth' => [
+        'jwt' => 'Dingo\Api\Auth\Provider\JWT',
     ],
 
     /*

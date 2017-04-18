@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0"/>
+    <title>timeData</title>
+    <link rel="stylesheet" href="timeData.css">
+</head>
+<body>
+<style>
+    body{background: #212121;}
+</style>
+
+<div class="timeData">
+<ul class="timeData-ul"  id="timeData" >
+    <li class="notLi"><p class="hide"><span>start</span></p></li>
+    <li><p data-time="9:00">9时</p></li>
+    <li data-id="act"><p class="hide"  data-time="9:30"><span>9:30</span></p></li>
+    <li><p   data-time="10:00">10时</p></li>
+    <li class="active"><p class="hide"   data-time="10:30"><span>10:30</span></p></li>
+    <li class="active"><p   data-time="11:00">11时</p></li>
+    <li class="active"><p class="hide"   data-time="11:30"><span>11:30</span></p></li>
+    <li><p   data-time="12:00">12时</p></li>
+    <li><p class="hide"   data-time="12:30"><span>12:30</span></p></li>
+    <li><p   data-time="13:00">13时</p></li>
+    <li><p class="hide"   data-time="13:30"><span>13:30</span></p></li>
+    <li><p   data-time="14:00">14时</p></li>
+    <li><p class="hide"   data-time="14:30"><span>14:30</span></p></li>
+    <li><p   data-time="15:00">15时</p></li>
+    <li><p class="hide"   data-time="15:30"><span>15:30</span></p></li>
+    <li><p   data-time="16:00">16时</p></li>
+    <li><p class="hide" data-time="16:30"><span>16:30</span></p></li>
+    <li><p  data-time="17:00">17时</p></li>
+    <li><p class="hide" data-time="17:30"><span>17:30</span></p></li>
+    <li><p   data-time="18:00">18时</p></li>
+    <li><p class="hide"   data-time="18:30"><span>18:30</span></p></li>
+    <li><p   data-time="19:00">19时</p></li>
+    <li><p class="hide"   data-time="19:30"><span>19:30</span></p></li>
+    <li><p   data-time="20:00">20时</p></li>
+    <li><p class="hide"   data-time="20:30"><span>20:30</span></p></li>
+    <li class="notLi"><p class="hide"><span>end</span></p></li>
+</ul>
+</div>
+<p id="timeData-html" style="color:#fff;text-align: center;">请选择预约时间</p>
+
+<div class="timeData">
+    <ul class="timeData-ul"  id="timeData1" >
+        <li class="notLi"><p class="hide"><span>start</span></p></li>
+        <li><p data-time="9:00">9时</p></li>
+        <li data-id="act"><p class="hide"  data-time="9:30"><span>9:30</span></p></li>
+        <li><p   data-time="10:00">10时</p></li>
+        <li class="active"><p class="hide"   data-time="10:30"><span>10:30</span></p></li>
+        <li class="active"><p   data-time="11:00">11时</p></li>
+        <li class="active"><p class="hide"   data-time="11:30"><span>11:30</span></p></li>
+        <li><p   data-time="12:00">12时</p></li>
+        <li><p class="hide"   data-time="12:30"><span>12:30</span></p></li>
+        <li><p   data-time="13:00">13时</p></li>
+        <li><p class="hide"   data-time="13:30"><span>13:30</span></p></li>
+        <li><p   data-time="14:00">14时</p></li>
+        <li><p class="hide"   data-time="14:30"><span>14:30</span></p></li>
+        <li><p   data-time="15:00">15时</p></li>
+        <li><p class="hide"   data-time="15:30"><span>15:30</span></p></li>
+        <li><p   data-time="16:00">16时</p></li>
+        <li><p class="hide" data-time="16:30"><span>16:30</span></p></li>
+        <li><p  data-time="17:00">17时</p></li>
+        <li><p class="hide" data-time="17:30"><span>17:30</span></p></li>
+        <li><p   data-time="18:00">18时</p></li>
+        <li><p class="hide"   data-time="18:30"><span>18:30</span></p></li>
+        <li><p   data-time="19:00">19时</p></li>
+        <li><p class="hide"   data-time="19:30"><span>19:30</span></p></li>
+        <li><p   data-time="20:00">20时</p></li>
+        <li><p class="hide"   data-time="20:30"><span>20:30</span></p></li>
+        <li class="notLi"><p class="hide"><span>end</span></p></li>
+    </ul>
+</div>
+<p id="timeData1-html" style="color:#fff;text-align: center;">请选择预约时间</p>
+
+
+
+<script type="text/javascript" src="jquery-2.1.1.min.js"></script>
+<script>
+    function showUlist(){
+        $(document.body).find(".timeData-ul").each(function(){
+            var liSum=$(this).find("li").length;
+            $(this).css("width",(liSum*50));
+            $(this).find("li").each(function(i){
+                var actClass=$(this).attr("class");
+                if(actClass=="action"){
+                    $(this).removeAttr("data-id");
+                    $(this).removeAttr("class");
+                }
+            });
+            var id=$(this).attr("id");
+            $("#"+id+'-html').html("请选择预约时间");
+        });
+    }
+    showUlist();
+    $(".timeData-ul li").on("click",function(){
+        var id=$(this).parents().attr("id");
+        var cl=$(this).attr("class");
+
+        if(cl=="notLi" || cl==="active"){
+            return false;
+        }else{
+        console.log(cl);
+        var act="";
+        var st="";
+        var et="";
+        $("#"+id).find("li").each(function(i){
+
+            var did=$(this).attr("data-id");
+            if(did=="sact"){
+                st=i;
+            }
+            if(did=="eact"){
+                et=i;
+            }
+        });
+       if(st!="" && et!=""){
+           $("#"+id).find("li").each(function(i){
+                   var actClass=$(this).attr("class");
+                   if(actClass=="action"){
+                       $(this).removeAttr("data-id");
+                       $(this).removeAttr("class");
+                   }
+
+           });
+           showUlist();
+           $(this).attr("data-id","sact");
+           $(this).attr("class","action");
+           $("#"+id+'-html').html("请选择预约时间");
+           return false;
+       }
+        if(st=="" && et==""){
+            showUlist();
+            $(this).attr("data-id","sact");
+            $(this).attr("class","action");
+        }
+        if(st!=""){
+            et=$(this).index();
+            var bi,sst=st,eet=et;
+            if(st>et){
+                bi=st;
+                sst=et;
+                eet=bi;
+            }
+            for(var b=sst;b<eet;b++){
+                $("#"+id).find("li").each(function(i){
+                    if(b==i){
+                        var actClass=$(this).attr("class");
+                        if(actClass=="active"){
+                            et="notAction";
+                        }
+                    }
+                });
+            }
+          }
+        if(st!="" && cl==undefined  && et!="notAction"){
+            $(this).attr("data-id","eact");
+            $(this).attr("class","action");
+            et=$(this).index();
+        }
+        if(st!="" && et!=""){
+                var bi;
+                if(st>et){
+                    bi=st;
+                    st=et;
+                    et=bi;
+                }
+            var startTime,endTime;
+                for(var t=st;t<et;t++){
+                    $("#"+id).find("li").each(function(i){
+                        if(i==t){
+                            $(this).attr("class","action");
+                        }
+                        if(i==st){
+                            startTime=$(this).find("p").attr("data-time");
+                        }
+                        if(i==et){
+                            endTime=$(this).find("p").attr("data-time");
+                        }
+                    });
+                }
+            if(startTime==undefined || endTime==undefined){
+                return false;
+            }else{
+                $("#"+id+'-html').html(startTime+"——"+endTime+"   共"+((et-st)*0.5+0.5)+"小时");
+            }
+        }
+        }
+    });
+</script>
+</body>
+</html>

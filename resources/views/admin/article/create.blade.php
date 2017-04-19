@@ -15,14 +15,20 @@
                         </div>
                     @endif
 
-                    <form action="{{ url('admin/article') }}" method="POST">
+                    <form action="{{ url('admin/article') }}" method="POST" enctype="multipart/form-data">
                         {!! csrf_field() !!}
                         <input type="text" name="title" class="form-control" required="required" placeholder="请输入标题">
                         <br>
                         <textarea name="body" rows="10" class="form-control" required="required" placeholder="请输入内容"></textarea>
                         <br>
-                        <textarea name="community_name" rows="10" class="form-control" requiiasdred="required" placeholder="Community Name"></textarea>
-                        <br>asd
+                        <textarea name="community_name"  class="form-control" requiiasdred="required" placeholder="Community Name"></textarea>
+                        <br>
+                        <div class="row">
+            				<div class="col-md-12">
+            					<input type="file" name="image"  />
+            				</div>
+                        </div>
+                        <br>
                         <button class="btn btn-lg btn-info">新增文章</button>
                     </form>
 

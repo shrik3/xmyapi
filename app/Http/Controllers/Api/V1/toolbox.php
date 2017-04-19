@@ -37,6 +37,9 @@ function get_community_id($name){
 
 }
 
+
+
+
 function get_comments($article_id){
         $result =  \App\Comment::where('article_id',$article_id);
         return $result;

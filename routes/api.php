@@ -30,8 +30,12 @@ $api->version('v1',function($api){
         $api->post('/user/auth','UserController@auth');
 
         // 需要鉴权
-        $api->group(['middleware' => 'api.auth'], function ($api) {
-            $api->post('/secrets/',function(){return ('this is under auth protection');});
+        $api->group(['middleware' => 'api.auth','namespace' => 'Admin'], function ($api) {
+            $api->post('/secrets/{id}','TestController@test');
+
+            $api->resource('/manage/community','CommunityController');
+            $api->resource('/manage/article','ArticleController');
+
         });
 
 

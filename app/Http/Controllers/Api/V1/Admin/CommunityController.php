@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Web\Admin;
+namespace App\Http\Controllers\Api\V1\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-require_once('toolbox.php');
 
 class CommunityController extends Controller
 {

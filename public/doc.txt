@@ -15,3 +15,35 @@ form:
 
 访问受保护的页面：使用header：
 Authorization: Bearer [_token]
+
+
++------+-----------+-----------------------------------+-------------------+---------------------------------------------------------------+-----------+------------+----------+------------+
+| Host | Method    | URI                               | Name              | Action                                                        | Protected | Version(s) | Scope(s) | Rate Limit |
++------+-----------+-----------------------------------+-------------------+---------------------------------------------------------------+-----------+------------+----------+------------+
+|      | GET|HEAD  | /api/hello                        |                   | App\Http\Controllers\Api\V1\UserController@index              | No        | v1         |          |            |
+|      | GET|HEAD  | /api/test/{id}                    |                   | App\Http\Controllers\Api\V1\TestController@show               | No        | v1         |          |            |
+|      | GET|HEAD  | /api/community                    | community.index   | App\Http\Controllers\Api\V1\CommunityController@index         | No        | v1         |          |            |
+|      | POST      | /api/community                    | community.store   | App\Http\Controllers\Api\V1\CommunityController@store         | No        | v1         |          |            |
+|      | GET|HEAD  | /api/community/{community}        | community.show    | App\Http\Controllers\Api\V1\CommunityController@show          | No        | v1         |          |            |
+|      | PUT|PATCH | /api/community/{community}        | community.update  | App\Http\Controllers\Api\V1\CommunityController@update        | No        | v1         |          |            |
+|      | DELETE    | /api/community/{community}        | community.destroy | App\Http\Controllers\Api\V1\CommunityController@destroy       | No        | v1         |          |            |
+|      | GET|HEAD  | /api/article                      | article.index     | App\Http\Controllers\Api\V1\ArticleController@index           | No        | v1         |          |            |
+|      | POST      | /api/article                      | article.store     | App\Http\Controllers\Api\V1\ArticleController@store           | No        | v1         |          |            |
+|      | GET|HEAD  | /api/article/{article}            | article.show      | App\Http\Controllers\Api\V1\ArticleController@show            | No        | v1         |          |            |
+|      | PUT|PATCH | /api/article/{article}            | article.update    | App\Http\Controllers\Api\V1\ArticleController@update          | No        | v1         |          |            |
+|      | DELETE    | /api/article/{article}            | article.destroy   | App\Http\Controllers\Api\V1\ArticleController@destroy         | No        | v1         |          |            |
+|      | GET|HEAD  | /api/article/{id}/comments        |                   | App\Http\Controllers\Api\V1\CommentController@show            | No        | v1         |          |            |
+|      | POST      | /api/user/register                |                   | App\Http\Controllers\Api\V1\UserController@register           | No        | v1         |          |            |
+|      | POST      | /api/user/auth                    |                   | App\Http\Controllers\Api\V1\UserController@auth               | No        | v1         |          |            |
+|      | POST      | /api/secrets/{id}                 |                   | App\Http\Controllers\Api\V1\Admin\TestController@test         | Yes       | v1         |          |            |
+|      | GET|HEAD  | /api/manage/community             | community.index   | App\Http\Controllers\Api\V1\Admin\CommunityController@index   | Yes       | v1         |          |            |
+|      | POST      | /api/manage/community             | community.store   | App\Http\Controllers\Api\V1\Admin\CommunityController@store   | Yes       | v1         |          |            |
+|      | GET|HEAD  | /api/manage/community/{community} | community.show    | App\Http\Controllers\Api\V1\Admin\CommunityController@show    | Yes       | v1         |          |            |
+|      | PUT|PATCH | /api/manage/community/{community} | community.update  | App\Http\Controllers\Api\V1\Admin\CommunityController@update  | Yes       | v1         |          |            |
+|      | DELETE    | /api/manage/community/{community} | community.destroy | App\Http\Controllers\Api\V1\Admin\CommunityController@destroy | Yes       | v1         |          |            |
+|      | GET|HEAD  | /api/manage/article               | article.index     | App\Http\Controllers\Api\V1\Admin\ArticleController@index     | Yes       | v1         |          |            |
+|      | POST      | /api/manage/article               | article.store     | App\Http\Controllers\Api\V1\Admin\ArticleController@store     | Yes       | v1         |          |            |
+|      | GET|HEAD  | /api/manage/article/{article}     | article.show      | App\Http\Controllers\Api\V1\Admin\ArticleController@show      | Yes       | v1         |          |            |
+|      | PUT|PATCH | /api/manage/article/{article}     | article.update    | App\Http\Controllers\Api\V1\Admin\ArticleController@update    | Yes       | v1         |          |            |
+|      | DELETE    | /api/manage/article/{article}     | article.destroy   | App\Http\Controllers\Api\V1\Admin\ArticleController@destroy   | Yes       | v1         |          |            |
++------+-----------+-----------------------------------+-------------------+---------------------------------------------------------------+-----------+------------+----------+------------+

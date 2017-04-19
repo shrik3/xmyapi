@@ -21,6 +21,8 @@
                         <br>
                         <textarea name="body" rows="10" class="form-control" required="required" placeholder="请输入内容"></textarea>
                         <br>
+                        <textarea name="community_name" rows="10" class="form-control" requiiasdred="required" placeholder="Community Name"></textarea>
+                        <br>asd
                         <button class="btn btn-lg btn-info">新增文章</button>
                     </form>
 

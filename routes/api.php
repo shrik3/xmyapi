@@ -29,6 +29,11 @@ $api->version('v1',function($api){
         $api->post('/user/register','UserController@register');
         $api->post('/user/auth','UserController@auth');
 
+        // 需要鉴权
+        $api->group(['middleware' => 'api.auth'], function ($api) {
+            $api->post('/secrets/',function(){return ('this is under auth protection');});
+        });
+
 
     });
 

@@ -1,0 +1,17 @@
+登陆：
+
+POST  domain/api/user/auth
+
+form:
+
+{
+"name":
+"password":
+}
+
+返回
+{"access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIU"}
+
+
+访问受保护的页面：使用header：
+Authorization: Bearer [_token]

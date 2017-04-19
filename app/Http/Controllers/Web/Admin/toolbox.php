@@ -32,8 +32,8 @@ function get_community_icon_path($community_id){
 }
 
 function get_community_id($name){
-    $name = \App\Community::select('id')->where(['name'=>$name])->first();
-    return $name[id];
+    $id = \App\Community::select('id')->where(['name'=>$name])->first();
+    return $id['id'];
 
 }
 

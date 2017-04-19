@@ -16,3 +16,18 @@ Route::get('/', function () {
 });
 
 Route::get('/room','Web\AppointmentController@show');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
+
+
+Route::auth();
+Route::group(['middleware' => 'auth', 'namespace' => 'Web\Admin', 'prefix' => 'admin'], function() {
+    Route::get('/', 'HomeController@index');
+    Route::resource('article','ArticleController');
+    Route::resource('photo','PhotoController');
+    Route::resource('community','CommunityController');
+    Route::get('/test','TestController@test');
+    }
+);

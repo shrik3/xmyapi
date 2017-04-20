@@ -4,18 +4,10 @@ namespace App\Http\Controllers\Api\V1\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CommunityController extends Controller
+class CommunityController extends \App\Http\Controllers\Api\V1\CommunityController
 {
-    //
-    public function index()
-    {
-        return view('admin/community/index')->withCommunities(\App\Community::all());
-    }
 
-    public function create()
-    {
-        return view('admin/community/create');
-    }
+
     public function store(Request $request) // Laravel 的依赖注入系统会自动初始化我们需要的 Request 类
     {
         // 数据验证

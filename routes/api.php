@@ -20,8 +20,8 @@ $api->version('v1',function($api){
     $api->group(['namespace' => 'App\Http\Controllers\Api\V1'], function ($api) {
         $api->get('/hello/', 'UserController@index');
         $api->get('test/{id}','TestController@show');
-        $api->resource('community','CommunityController');
-        $api->resource('article','ArticleController');
+        $api->resource('community','CommunityController',['only' => ['index','show']]);
+        $api->resource('article','ArticleController', ['only'=>['index','show']]);
 
         $api->get('/article/{id}/comments','CommentController@show');
 

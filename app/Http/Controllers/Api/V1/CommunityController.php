@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Api\V1;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-require_once('toolbox.php');
+use App\Http\Controllers\Api\V1\toolbox;
+use Dingo\Api\Routing\Helpers;
+include('toolbox.php');
 class CommunityController extends Controller
 {
     //
+    use Helpers;
     public function show($id){
         $r1 = \App\Community::find($id);
         if($r1){

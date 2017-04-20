@@ -4,24 +4,22 @@ namespace App\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-require_once('toolbox.php');
+use Dingo\Api\Routing\Helpers;
+include('toolbox.php');
 
 class ArticleController extends Controller
 {
     //
+    use Helpers;
     public function index()
     {
         $result = \App\Article::all();
         foreach ($result as $a) {
 
-
-
             $a['front_image']=get_article_image_path($a['id']);
-
             $a['comments'] = \App\Comment::where('article_id',1)->count();
             $community = \App\Community::select('name')->where('id',$a['owner_id'])->first();
             $a['owner_name'] = $community['name'];
-
             // low efficency  : get community icon ...
             $a['icon'] = get_community_icon_path($a['owner_id']);
 
@@ -29,10 +27,10 @@ class ArticleController extends Controller
         return $result;
     }
 
+
     public function show($id)
     {
         $result = \App\Article::find($id);
-        // 这里是一个伪实现，模型关系未完成
         if ($result) {
 
             $result['front_image'] = get_article_image_path($id);

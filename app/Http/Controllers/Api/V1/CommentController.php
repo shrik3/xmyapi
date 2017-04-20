@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-require_once('toolbox.php');
 
 class CommentController extends Controller
 {

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Web\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-require_once('toolbox.php');
 
 class CommunityController extends Controller
 {

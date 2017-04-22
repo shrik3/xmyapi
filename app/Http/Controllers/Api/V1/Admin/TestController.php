@@ -2,14 +2,16 @@
 
 
 namespace App\Http\Controllers\Api\V1\Admin;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-class TestController extends Controller
-{
+use App\Traits\AuthTools;
 
-    //TestController
-    public function test($id){
-        return 'testing on request id  '.$id.' this page is under protection';
+class TestController extends Controller {
+    use AuthTools;
+    public function me(){
+        $user = $this->getAuthenticatedUser();
+        return $user;
     }
 
 }

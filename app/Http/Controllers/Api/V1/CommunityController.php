@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Api\V1\toolbox;
 use Dingo\Api\Routing\Helpers;
-include('toolbox.php');
+require_once('toolbox.php');
 class CommunityController extends Controller
 {
     //

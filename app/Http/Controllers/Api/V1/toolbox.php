@@ -21,23 +21,6 @@ function check_item($items,$array){
     return true;
 }
 
-function check_request(Request $request,$check=[]){
-    // To use this helper function , make sure Dingo\Api\Routing\Helpers
-    // and Illuminate\Http\Request  have been imported where this function
-    // is to be used
-    $content = $request->getContent();
-    if(is_not_json($content)){
-        $this->response->errorBadRequest('this is not json , fuck you');
-    }
-
-    $data = json_decode($contrent,true);
-    if($check){
-        if(!$check_item($check,$data);){
-            $this->response->errorBadRequest('incomplete data set, fuck you');
-        }
-    }
-
-}
 
 function get_community_icon_path($community_id){
     $icon = \App\Photo::select('file_name')

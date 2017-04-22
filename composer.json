@@ -6,9 +6,11 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "barryvdh/laravel-ide-helper": "v2.3.2",
+        "dingo/api": "1.0.*@dev",
+        "doctrine/dbal": "2.3.5",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
-        "dingo/api": "1.0.*@dev",
         "tymon/jwt-auth": "0.5.*"
     },
     "require-dev": {
@@ -42,6 +44,8 @@
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "php artisan ide-helper:generate",
+            "php artisan ide-helper:meta",
             "php artisan optimize"
         ]
     },

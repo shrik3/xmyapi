@@ -19,7 +19,7 @@ $api = app('Dingo\Api\Routing\Router');
 $api->version('v1',function($api){
     $api->group(['namespace' => 'App\Http\Controllers\Api\V1'], function ($api) {
         $api->get('/hello/', 'UserController@index');
-        $api->get('test/{id}','TestController@show');
+        $api->get('test/','TestController@show');
         $api->resource('community','CommunityController',['only' => ['index','show']]);
         $api->resource('article','ArticleController', ['only'=>['index','show']]);
 
@@ -28,14 +28,18 @@ $api->version('v1',function($api){
         // 用户相关
         $api->post('/user/register','UserController@register');
         $api->post('/user/auth','UserController@auth');
-
+        $api->get('/membership','Admin\MembershipController@index');
         // 需要鉴权
         $api->group(['middleware' => 'api.auth','namespace' => 'Admin'], function ($api) {
+
+            // testing
             $api->post('/secrets/{id}','TestController@test');
+            $api->get('/me','TestController@me');
 
             $api->resource('/manage/community','CommunityController');
             $api->resource('/manage/article','ArticleController');
-
+            // membership controll
+            $api->post('community/join','MembershipController@join');
         });
 
 

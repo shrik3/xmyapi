@@ -16,37 +16,37 @@ use Illuminate\Http\Request;
 
 $api = app('Dingo\Api\Routing\Router');
 
-$api->version('v1',function($api){
+$api->version('v1', function ($api) {
     $api->group(['namespace' => 'App\Http\Controllers\Api\V1'], function ($api) {
         $api->get('/hello/', 'UserController@index');
-        $api->get('test/','TestController@show');
-        $api->resource('community','CommunityController',['only' => ['index','show']]);
-        $api->resource('article','ArticleController', ['only'=>['index','show']]);
+        $api->get('test/', 'TestController@show');
+        $api->resource('community', 'CommunityController', ['only' => ['index', 'show']]);
+        $api->resource('article', 'ArticleController', ['only' => ['index', 'show']]);
 
-        $api->get('/article/{id}/comments','CommentController@show');
+        $api->get('/article/{id}/comments', 'CommentController@show');
 
         // 用户相关
-        $api->post('/user/register','UserController@register');
-        $api->post('/user/auth','UserController@auth');
-        $api->get('/membership','Admin\MembershipController@index');
+        $api->post('/user/register', 'UserController@register');
+        $api->post('/user/auth', 'UserController@auth');
+        $api->get('/membership', 'Admin\MembershipController@index');
         // 需要鉴权
-        $api->group(['middleware' => 'api.auth','namespace' => 'Admin'], function ($api) {
+        $api->group(['middleware' => 'api.auth', 'namespace' => 'Admin'], function ($api) {
 
             // testing
-            $api->post('/secrets/{id}','TestController@test');
-            $api->get('/me','TestController@me');
+            $api->post('/secrets/{id}', 'TestController@test');
+            $api->get('/my','MembershipController@my_groups');
 
-            $api->resource('/manage/community','CommunityController');
-            $api->resource('/manage/article','ArticleController');
+            $api->resource('/manage/community', 'CommunityController');
+            $api->resource('/manage/article', 'ArticleController');
             // membership controll
-            $api->post('community/join','MembershipController@join');
+            $api->post('community/join', 'MembershipController@join');
         });
 
 
     });
 
 
-  });
+});
 
 
 

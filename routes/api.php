@@ -33,7 +33,7 @@ $api->version('v1', function ($api) {
 
 
         // 需要鉴权
-        $api->group(['middleware' => 'api.auth', 'namespace' => 'user'], function ($api){
+        $api->group(['middleware' => 'api.auth', 'namespace' => 'User'], function ($api){
            $api->get('/user/getinfo',"InfoController@getinfo"); 
 
         });
@@ -41,6 +41,7 @@ $api->version('v1', function ($api) {
         $api->group(['middleware' => 'api.auth', 'namespace' => 'Admin'], function ($api) {
             // testing
 
+            // get user info :
             
             $api->post('/secrets/{id}', 'TestController@test');
             $api->get('/my','MembershipController@my_groups');

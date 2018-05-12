@@ -29,5 +29,7 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Web\Admin', 'prefix' => 'a
     // Route::resource('photo','PhotoController');
     Route::resource('community','CommunityController');
     Route::get('/test','TestController@test');
+    Route::get('modifyuser','SuperUserController@modify_user');
+    Route::post('changeicon','SuperUserController@change_icon');
     }
 );

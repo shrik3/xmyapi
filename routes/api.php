@@ -29,10 +29,19 @@ $api->version('v1', function ($api) {
         $api->post('/user/register', 'UserController@register');
         $api->post('/user/auth', 'UserController@auth');
         $api->get('/membership', 'Admin\MembershipController@index');
-        // 需要鉴权
-        $api->group(['middleware' => 'api.auth', 'namespace' => 'Admin'], function ($api) {
 
+
+
+        // 需要鉴权
+        $api->group(['middleware' => 'api.auth', 'namespace' => 'user'], function ($api){
+           $api->get('/user/getinfo',"InfoController@getinfo"); 
+
+        });
+
+        $api->group(['middleware' => 'api.auth', 'namespace' => 'Admin'], function ($api) {
             // testing
+
+            
             $api->post('/secrets/{id}', 'TestController@test');
             $api->get('/my','MembershipController@my_groups');
 

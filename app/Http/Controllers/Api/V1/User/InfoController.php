@@ -29,6 +29,7 @@ class InfoController extends Controller
         $result["name"] = $user->name;
         $result["email"] = $user->email;
         $result["IconUrl"] = $this->get_icon_path($id);
+        $result["id"] = $user->id;
 
         return $result;
     }

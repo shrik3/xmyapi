@@ -31,6 +31,8 @@ class InfoController extends Controller
         $result["IconUrl"] = $this->get_icon_path($id);
         $result["id"] = $user->id;
 
+        $result["status_code"] = 666;
+
         return $result;
     }
 

@@ -46,7 +46,7 @@ class UserController extends Controller {
         $user->save();
 
 
-        $success = array("message" => "done", "status_code" => "200");
+        $success = array("message" => "done", "status_code" => "666");
         return $success;
 
     }
@@ -79,7 +79,7 @@ class UserController extends Controller {
             if (!$access_token = JWTAuth::attempt($credentials)) {
                 $this->response->errorUnauthorized('wrong username or password!');
             }
-            return $this->response->array(['access_token' => $access_token]);
+            return $this->response->array(['access_token' => $access_token,"status_code"=>666]);
         } catch (JWTException $e) {
             $this->response->errorInternal('Unable to generate token');
         }

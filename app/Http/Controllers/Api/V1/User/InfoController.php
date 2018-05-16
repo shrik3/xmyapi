@@ -45,7 +45,8 @@ class InfoController extends Controller
         $content = $request->getContent();
         // 检测是否为 json 数据
         if (is_not_json($content)) {
-            $this->response->errorBadRequest('this is not json , fuck you');
+            // $this->response->errorBadRequest('this is not json , fuck you');
+            return $this->response->array(['status_code'=>406 , "message"=>"this is not json"]);
         }
         // json 数据解码
         $data = json_decode($content, true);

@@ -26,7 +26,7 @@ class UserController extends Controller {
         $data = json_decode($content, true);
 
         // 检查完整性
-        if (!check_item(["email", "name", "password"], $data)) {
+        if (!check_item(["email", "name", "password","nickname"], $data)) {
             // $this->response->errorBadRequest('incomplete data set, fuck you');
             return $this->response->array(['status_code'=>405 , "message"=>"bad request , imcomplete json"]);
         }
@@ -47,6 +47,7 @@ class UserController extends Controller {
         $user->name = $data['name'];
         $user->password = bcrypt($data['password']);
         $user->email = $data['email'];
+        $user->nickname = $data['nickname'];
         $user->save();
 
 

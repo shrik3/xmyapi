@@ -5,6 +5,7 @@
 - Poster
 - Icon
 - CommunityIcon
+- CircleIcon
 
 101 unsaved.
 

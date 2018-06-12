@@ -125,7 +125,83 @@ response:
 }
 ```
 
+## CIRCLE
+和community操作一样，所有api前缀改成
+/api/circle 
+
 
 ## CHANGE USER ICON
 
 /api/user/change_icon
+
+
+## ARTICLE
+
+POST JSON
+
+```
+{
+    "title": "xxx",
+    "content" : "XXX",
+    "to" : {
+        {
+            "type":"circle/community"
+            "id"  :"circle_id/community_id"
+        },
+
+        {
+            "type":"circle/community"
+            "id"  :"circle_id/community_id"
+        }
+    }
+}
+
+```
+
+
+## MY CIRCLE/ COMMUNITY:
+/api/user/mygroups
+
+json data
+
+```{
+    "status_code": 666,
+    "communities": [
+        {
+            "id": 9,
+            "name": "COM_n",
+            "brief": "c test",
+            "created_at": "2018-06-12 17:05:23",
+            "updated_at": "2018-06-12 17:05:23",
+            "my role": "creator"
+        },
+        {
+            "id": 10,
+            "name": "COM_x",
+            "brief": "fff test",
+            "created_at": "2018-06-12 17:08:10",
+            "updated_at": "2018-06-12 17:08:10",
+            "my role": "creator"
+        }
+    ],
+    "circles": [
+        {
+            "id": 1,
+            "name": "circleX",
+            "brief": "simple test",
+            "created_at": "2018-06-12 15:53:25",
+            "updated_at": "2018-06-12 15:53:25",
+            "my role": "creator"
+        },
+        {
+            "id": 2,
+            "name": "circleX2",
+            "brief": "simple test",
+            "created_at": "2018-06-12 15:53:55",
+            "updated_at": "2018-06-12 15:53:55",
+            "my role": "creator"
+        }
+    ]
+}
+```
+

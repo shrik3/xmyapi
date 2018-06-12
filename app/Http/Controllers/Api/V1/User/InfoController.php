@@ -40,6 +40,41 @@ class InfoController extends Controller
         return $result;
     }
 
+    public function mygroups(){
+        $id = Auth::user()->id;
+        $communities = \App\Membership::select()->where("member_id","=",$id)
+                                                  ->where("role","<=",3)->get();
+        $circles = \App\CircleMembership::select()->where("member_id","=",$id)
+                                                  ->where("role","<=",3)->get();
+
+        $r1 = [];
+        $r2 = [];
+
+        foreach ($communities as $com){
+            $com_id = $com["community_id"];
+            $info = \App\Community::find($com_id);
+            $info["my role"] = get_member_role($com["role"]);
+            array_push($r1, $info);
+        }
+ 
+        foreach ($circles as $cir){
+            $cir_id = $cir["circle_id"];
+            $info = \App\Circle::find($cir_id);
+            $info["my role"] = get_member_role($com["role"]);
+            array_push($r2, $info);
+ 
+        }
+
+        $result["status_code"] = 666;
+        $result["communities"] = $r1 ;
+        $result["circles"] = $r2;
+        return $result;
+
+
+
+
+    }
+
     public function change_nickname(Request $request){
 
         $content = $request->getContent();

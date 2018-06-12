@@ -10,6 +10,6 @@ class TestController extends Controller
     //
     public function test(){
 
-        return 'Test done';
+        return get_member_role(0);
     }
 }

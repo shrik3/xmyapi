@@ -56,3 +56,23 @@ function get_article_image_path($article_id) {
     return $url;
 
 }
+
+function get_member_role($role_code){
+    $list = [
+        0 => "creator" ,
+        1 => "manager" ,
+        2 => "normal member" ,
+        3 => "tobe member" ,
+        4 => "black list"
+    ];
+    return $list[$role_code]; 
+}
+
+function get_user_role($user_id,$com_id){
+    $mem = \App\Membership::where(['member_id'=>$user_id])->first();
+    if(!$mem) {
+        return 99;
+    }
+    return $mem['role'];
+
+}

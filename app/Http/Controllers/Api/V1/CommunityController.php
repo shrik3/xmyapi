@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Api\V1\toolbox;
 use Dingo\Api\Routing\Helpers;
 // require_once('toolbox.php');
+
+// this controller is for guests , no auth required...
 class CommunityController extends Controller
 {
     //

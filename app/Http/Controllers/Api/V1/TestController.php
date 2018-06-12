@@ -15,4 +15,9 @@ class TestController extends Controller
         return ('fuck you , done');
     }
 
+    public function filetest(Request $request){
+        $path = $request->file('avatar')->store('avatars');
+        return $path;
+
+    }
 }

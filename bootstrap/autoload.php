@@ -1,7 +1,7 @@
 <?php
 
 define('LARAVEL_START', microtime(true));
-
+$functionsPath = '/../app/Common/Tools.php';
 /*
 |--------------------------------------------------------------------------
 | Register The Composer Auto Loader
@@ -15,3 +15,7 @@ define('LARAVEL_START', microtime(true));
 */
 
 require __DIR__.'/../vendor/autoload.php';
+
+if(file_exists(__DIR__ . $functionsPath)){
+    require __DIR__ . $functionsPath;
+}

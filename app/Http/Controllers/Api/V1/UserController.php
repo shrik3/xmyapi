@@ -8,7 +8,7 @@ use Dingo\Api\Routing\Helpers;
 use JWTAuth;
 
 // 这是一些自定义的工具
-require_once('toolbox.php');
+// require_once('toolbox.php');
 
 class UserController extends Controller {
     //

@@ -17,7 +17,7 @@ class CreateMembershipTable extends Migration
             $table->increments('id');
             $table->integer('community_id');
             $table->integer('member_id');
-            $table->string('role');
+            $table->integer('role');
             $table->timestamps();
         });
         //

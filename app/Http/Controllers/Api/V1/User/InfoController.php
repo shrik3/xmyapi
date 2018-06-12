@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Dingo\Api\Routing\Helpers;
 use JWTAuth;
 use Auth;
-require_once("toolbox.php");
+// include "../toolbox.php";
 
 
 class InfoController extends Controller

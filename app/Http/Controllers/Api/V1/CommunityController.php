@@ -15,7 +15,9 @@ class CommunityController extends Controller
         if($r1){
             $r1['icon'] = get_community_icon_path($r1['id']);
         }
-        return $r1;
+        $r["status_code"] = 666;
+        $r["community"] = $r1;
+        return $r;
     }
 
     public function index(){
@@ -23,7 +25,9 @@ class CommunityController extends Controller
         foreach($result as $a){
             $a['icon'] = get_community_icon_path($a['id']);
         }
-        return $result;
+        $r1["status_code"] = 666;
+        $r1["communities"] = $result;
+        return $r1;
 
     }
 

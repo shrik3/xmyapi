@@ -72,6 +72,7 @@ if community doesn't exist:
 
 创建和上传图片分两个request进行。
 AUTH HEADER REQUIRED
+/api/community/create
 JSON DATA:
 
 ```
@@ -95,6 +96,7 @@ response 会返回成功创建的新社团id，这个id是社团的唯一标识�
 
 
 图片上传 ： 要求当前用户是社团的创建者或管理员
+/api/community/icon
 
 ```
 form data:
@@ -122,3 +124,8 @@ response:
     "message": "you are not allowed to do that"
 }
 ```
+
+
+## CHANGE USER ICON
+
+/api/user/change_icon

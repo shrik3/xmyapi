@@ -66,5 +66,24 @@ class InfoController extends Controller
             return $result;
         }
     }
+
+    public function change_icon(Request $request){
+        $user_id = Auth::user()->id;
+        $this->validate($request , [
+            'image'=> 'required|image|mimes:jpeg,png,jpt,gif,svg|max:2048',
+        ]);
+
+        $newImage = new \App\Photo;
+        $newImage->title = "icon";
+        $newImage->file_name = time().'.'.$request->image->getClientOriginalExtension();
+        $newImage->type = "UserIcon";
+        $newImage->owner_id = $user_id;
+        $request->image->move(public_path('images'), $newImage->file_name);
+        if (!$newImage->save()) {
+            return $this->response->array(['status_code'=>101 , "message"=>"unsaved"]);
+
+        }
+            return $this->response->array(['status_code'=>666 , "message"=>"saved"]);
+    }
     
 }

@@ -40,6 +40,7 @@ $api->version('v1', function ($api) {
         $api->group(['middleware' => 'api.auth', 'namespace' => 'User'], function ($api){
            $api->get('/user/getinfo',"InfoController@getinfo"); 
            $api->post('/user/change_nickname',"InfoController@change_nickname"); 
+           $api->post('/user/change_icon',"InfoController@change_icon"); 
 
         });
 

@@ -2,7 +2,9 @@
 
 ## GET COMMUNITIES INDEX: 
 
-GET  /api/community/    NO AUTH
+GET  /api/community/    
+
+NO AUTH
 
 test response:
 
@@ -40,7 +42,9 @@ test response:
 
 ## GET COMMUNITY
 
-GET /api/community/{id}   NO AUTH
+GET /api/community/{id}   
+
+NO AUTH
 
 test response:
 
@@ -137,26 +141,31 @@ response:
 
 ## ARTICLE
 
+TOKEN REQUIRED
+
 POST JSON
 
 ```
 {
-    "title": "xxx",
-    "content" : "XXX",
-    "to" : {
+    "title": "title",
+    "body": "content",
+    "to": [
         {
-            "type":"circle/community"
-            "id"  :"circle_id/community_id"
+            "type": "community",
+            "id": 1
         },
-
         {
-            "type":"circle/community"
-            "id"  :"circle_id/community_id"
+            "type": "circle",
+            "id": 1
         }
-    }
+    ]
 }
 
 ```
+
+成功则返回666 success
+务必注意，要确定发文章的人拥有对应圈子/社团的权限   （非社团圈子成员不能在里面发文章）
+服务端暂时没有进一步验证用户权限。
 
 
 ## MY CIRCLE/ COMMUNITY:
@@ -164,7 +173,8 @@ POST JSON
 
 json data
 
-```{
+```
+{
     "status_code": 666,
     "communities": [
         {
@@ -205,3 +215,11 @@ json data
 }
 ```
 
+
+## JOIN COMMUNITY / CIRCLE
+
+TOKEN REQUIRED 
+
+- GET /api/community/join/{id}
+
+- GET /api/circle/join/{id}

@@ -41,22 +41,32 @@ $api->version('v1', function ($api) {
         $api->group(['middleware' => 'api.auth', 'namespace' => 'User'], function ($api){
            $api->get('/user/getinfo',"InfoController@getinfo"); 
            $api->get('/user/mygroups',"InfoController@mygroups"); 
+
+
            $api->post('/user/change_nickname',"InfoController@change_nickname"); 
            $api->post('/user/change_icon',"InfoController@change_icon"); 
+
+
 
         });
 
         $api->group(['middleware' => 'api.auth', 'namespace' => 'Community'], function ($api){
            $api->post('/community/create',"CommunityController@create"); 
            $api->post('/community/icon/',"CommunityController@icon"); 
+           $api->get('/community/join/{id}',"CommunityController@join"); 
         });
 
         $api->group(['middleware' => 'api.auth', 'namespace' => 'Circle'], function ($api){
            $api->post('/circle/create',"CircleController@create"); 
            $api->post('/circle/icon/',"CircleController@icon"); 
+           $api->get('/circle/join/{id}',"CircleController@join"); 
         });
 
-
+        $api->group(['middleware' => 'api.auth', 'namespace' => 'Article'], function ($api){
+            $api->post('/article/create',"ArticleController@create"); 
+         });
+ 
+ 
 
 
         $api->group(['middleware' => 'api.auth', 'namespace' => 'Admin'], function ($api) {

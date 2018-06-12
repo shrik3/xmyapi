@@ -11,6 +11,31 @@ class CommunityController extends Controller
 {
     use Helpers;
     //
+
+
+    public function join($id){
+        $user_id = Auth::user()->id;
+        if(!\App\Community::find($id)){
+            return $this->response->array(['status_code'=>501 , "message"=>"community doesn't exist"]);
+        }
+        if(\App\Membership::select()->where("member_id","=",$user_id)
+                                          ->where("community_id","=",$id)
+                                          ->count()){
+                                              return "already a member";
+                                          }
+        $r = new \App\Membership;
+        $r->community_id = $id;
+        $r->member_id = $user_id;
+        $r->role = "2";
+        if(!$r->save()){
+            return $this->response->array(['status_code'=>101 , "message"=>"failed"]);
+        }
+        return $this->response->array(['status_code'=>666 , "message"=>"success"]);
+
+    }
+
+
+
     public function icon(Request $request){
         // $content = $request->getContent();
         // // 检测是否为 json 数据

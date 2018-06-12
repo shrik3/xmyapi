@@ -13,6 +13,28 @@ class CircleController extends Controller
     //
     use Helpers;
 
+    public function join($id){
+        $user_id = Auth::user()->id;
+        if(!\App\Circle::find($id)){
+            return $this->response->array(['status_code'=>501 , "message"=>"circle doesn't exist"]);
+        }
+        if(\App\CircleMembership::select()->where("member_id","=",$user_id)
+                                          ->where("circle_id","=",$id)
+                                          ->count()){
+                                              return "already a member";
+                                          }
+        $r = new \App\CircleMembership;
+        $r->circle_id = $id;
+        $r->member_id = $user_id;
+        $r->role = "2";
+        if(!$r->save()){
+            return $this->response->array(['status_code'=>101 , "message"=>"failed"]);
+        }
+        return $this->response->array(['status_code'=>666 , "message"=>"success"]);
+
+    }
+
+
     public function show($id){
         $r1 = \App\Circle::find($id);
         if($r1){

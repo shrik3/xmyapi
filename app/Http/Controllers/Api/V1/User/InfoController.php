@@ -53,14 +53,14 @@ class InfoController extends Controller
         foreach ($communities as $com){
             $com_id = $com["community_id"];
             $info = \App\Community::find($com_id);
-            $info["my role"] = get_member_role($com["role"]);
+            $info["my_role"] = get_member_role($com["role"]);
             array_push($r1, $info);
         }
  
         foreach ($circles as $cir){
             $cir_id = $cir["circle_id"];
             $info = \App\Circle::find($cir_id);
-            $info["my role"] = get_member_role($com["role"]);
+            $info["my_role"] = get_member_role($com["role"]);
             array_push($r2, $info);
  
         }

@@ -33,6 +33,17 @@ function get_community_icon_path($community_id) {
     return $url;
 }
 
+function get_circle_icon_path($circle_id) {
+    $icon = \App\Photo::select('file_name')
+        ->where([
+            'owner_id' => $circle_id,
+            'type' => 'CircleIcon'
+        ])
+        ->first();
+    $url = url('images/' . $icon['file_name']);
+    return $url;
+}
+
 function get_community_id($name) {
     $id = \App\Community::select('id')->where(['name' => $name])->first()["id"];
     return $id;
@@ -69,10 +80,17 @@ function get_member_role($role_code){
 }
 
 function get_user_role($user_id,$com_id){
-    $mem = \App\Membership::where(['member_id'=>$user_id])->first();
+    $mem = \App\Membership::where(['member_id'=>$user_id,"community_id"=>$com_id])->first();
     if(!$mem) {
         return 99;
     }
     return $mem['role'];
+}
 
+function get_circle_user_role($user_id,$cir_id){
+    $mem = \App\CircleMembership::where(['member_id'=>$user_id,'circle_id'=>$cir_id])->first();
+    if(!$mem) {
+        return 99;
+    }
+    return $mem['role'];
 }

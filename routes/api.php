@@ -25,6 +25,7 @@ $api->version('v1', function ($api) {
         $api->post('filetest/', 'TestController@filetest');
 
         $api->resource('community', 'CommunityController', ['only' => ['index', 'show']]);
+        $api->resource('circle', 'Circle\CircleController', ['only' => ['index', 'show']]);
         $api->resource('article', 'ArticleController', ['only' => ['index', 'show']]);
 
         $api->get('/article/{id}/comments', 'CommentController@show');
@@ -47,8 +48,13 @@ $api->version('v1', function ($api) {
         $api->group(['middleware' => 'api.auth', 'namespace' => 'Community'], function ($api){
            $api->post('/community/create',"CommunityController@create"); 
            $api->post('/community/icon/',"CommunityController@icon"); 
-
         });
+
+        $api->group(['middleware' => 'api.auth', 'namespace' => 'Circle'], function ($api){
+           $api->post('/circle/create',"CircleController@create"); 
+           $api->post('/circle/icon/',"CircleController@icon"); 
+        });
+
 
 
 

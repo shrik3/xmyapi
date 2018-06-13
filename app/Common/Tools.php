@@ -104,7 +104,7 @@ function get_circle_articles($id){
     $result = DB::table('article_posts')->join('articles','article_posts.article_id','=','articles.id')
                                         ->join("users","users.id","=","articles.author_id")
                                         ->join("photos","photos.owner_id","=","users.id")
-                                        ->join("circles","circles.id","=")
+                                        ->join("circles","circles.id","=","article_posts.owner_id")
                                         ->where("photos.type","=","UserIcon")
                                         ->where('article_posts.owner_type','=','circle')
                                         ->where('article_posts.owner_id','=',$id)
@@ -134,15 +134,11 @@ function get_community_articles($id){
     }
     return $result;
 
-    $result = DB::table('article_posts')->join('articles','article_posts.article_id','=','articles.id')
-                                        ->where('article_posts.owner_type','=','community')
-                                        ->where('article_posts.owner_id','=',$id)
-                                        ->select('articles.*')
-                                        ->orderBy('created_at','desc')
-                                        ->get();
-    return $result;
-}
-
-function get_article_owners($id){
-
+    // $result = DB::table('article_posts')->join('articles','article_posts.article_id','=','articles.id')
+    //                                     ->where('article_posts.owner_type','=','community')
+    //                                     ->where('article_posts.owner_id','=',$id)
+    //                                     ->select('articles.*')
+    //                                     ->orderBy('created_at','desc')
+    //                                     ->get();
+    // return $result;
 }

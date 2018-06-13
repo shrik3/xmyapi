@@ -22,8 +22,12 @@ class ArticleController extends Controller
     }
 
     public function index(){
-        $list = \App\Article::orderBy("created_at",'desc')->get();
         $list["status_code"] = 666;
+        $list["articles"] = \DB::table("articles")->join("article_posts","articles.id","=","article_posts.article_id")
+                                      ->select("articles.*","article_posts.owner_id","article_posts.owner_type")
+                                      ->orderBy("created_at","desc")
+                                      ->get();
+        // $list = \App\Article::orderBy("created_at",'desc')->get();
         return $list;
     }
 

@@ -115,5 +115,6 @@ function get_community_articles($id){
     return $result;
 }
 
-function info_success(){
+function get_article_owners($id){
+
 }

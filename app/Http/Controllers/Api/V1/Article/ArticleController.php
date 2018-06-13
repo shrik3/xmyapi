@@ -50,12 +50,18 @@ class ArticleController extends Controller
     }
 
     public function circle_index($id){
+        if(!\App\Circle::find($id)){
+            return $this->response->array(['status_code'=>501 , "message"=>"circle doesn't exist"]);
+        }
         $r["articles"] =  get_circle_articles($id);
         $r["status_code"] = 666;
         return $r;
     }
     
     public function community_index($id){
+        if(!\App\Community::find($id)){
+            return $this->response->array(['status_code'=>501 , "message"=>"community doesn't exist"]);
+        }
         $r["articles"]= get_community_articles($id);
         $r["status_code"] = 666;
         return $r;

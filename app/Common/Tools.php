@@ -114,3 +114,7 @@ function get_community_articles($id){
                                         ->get();
     return $result;
 }
+
+function info_success(){
+    return $this->response->array(['status_code'=>666 ,  "message"=>"success"]);
+}

@@ -14,6 +14,13 @@ class ArticleController extends Controller
     //
     use helpers;
 
+
+    public function like($id){
+        \DB::table("articles")->where("id",$id)->increment("likes");
+        return $this->response->array(['status_code'=>666 ,  "message"=>"success"]);
+
+    }
+
     public function index(){
         $list = \App\Article::orderBy("created_at",'desc')->get();
         return $list;

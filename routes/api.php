@@ -63,6 +63,7 @@ $api->version('v1', function ($api) {
 
         $api->group(['middleware' => 'api.auth', 'namespace' => 'Article'], function ($api){
             $api->post('/article/create',"ArticleController@create"); 
+            $api->get('/article/like/{id}',"ArticleController@like"); 
          });
  
         // some open api for article 

@@ -140,7 +140,7 @@ response:
 
 
 ## ARTICLE
-
+/api/article/create
 TOKEN REQUIRED
 
 POST JSON
@@ -167,6 +167,23 @@ POST JSON
 务必注意，要确定发文章的人拥有对应圈子/社团的权限   （非社团圈子成员不能在里面发文章）
 服务端暂时没有进一步验证用户权限。
 
+
+## 点赞： /api/article/like/{id}
+
+token required...
+
+## 获取文章列表
+全部文章列表：
+
+api/article/index
+
+社团的文章
+
+api/article/community/{id}
+
+圈子的文章
+
+api/article/circle/{id}
 
 ## MY CIRCLE/ COMMUNITY:
 /api/user/mygroups

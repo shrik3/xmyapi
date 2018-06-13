@@ -94,6 +94,19 @@ function get_article_comment_count($art_id){
 
 }
 
+
+function get_circle_member_count($id){
+    $count = \DB::table('circle_memberships')->where("circle_id","=",$id)->count();
+    return $count;
+}
+
+function get_community_member_count($id){
+    $count = \DB::table('memberships')->where("community_id","=",$id)->count();
+    return $count;
+
+}
+
+
 function get_image_path($filename){
     $url = url('images/' . $filename);
     return $url;
@@ -125,6 +138,8 @@ function get_circle_user_role($user_id,$cir_id){
     }
     return $mem['role'];
 }
+
+
 
 function get_circle_articles($id){
     $result = DB::table('article_posts')->join('articles','article_posts.article_id','=','articles.id')

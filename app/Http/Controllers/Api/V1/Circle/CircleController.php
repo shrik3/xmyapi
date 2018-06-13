@@ -39,6 +39,7 @@ class CircleController extends Controller
         $r1 = \App\Circle::find($id);
         if($r1){
             $r1['icon'] = get_circle_icon_path($r1['id']);
+            $r1['member_count'] = get_circle_member_count($id);
         }
         $r["status_code"] = 666;
         $r["circle"] = $r1;
@@ -49,6 +50,7 @@ class CircleController extends Controller
         $result = \App\Circle::all();
         foreach($result as $a){
             $a['icon'] = get_circle_icon_path($a['id']);
+            $a['member_count'] = get_circle_member_count($a['id']);
         }
         $r1["status_code"] = 666;
         $r1["circle"] = $result;

@@ -16,6 +16,7 @@ class CommunityController extends Controller
         $r1 = \App\Community::find($id);
         if($r1){
             $r1['icon'] = get_community_icon_path($r1['id']);
+            $r1['member_count'] = get_community_member_count($id);
         }
         $r["status_code"] = 666;
         $r["community"] = $r1;
@@ -26,6 +27,7 @@ class CommunityController extends Controller
         $result = \App\Community::all();
         foreach($result as $a){
             $a['icon'] = get_community_icon_path($a['id']);
+            $a['member_count'] = get_community_member_count($a['id']);
         }
         $r1["status_code"] = 666;
         $r1["communities"] = $result;

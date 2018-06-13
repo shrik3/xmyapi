@@ -50,13 +50,13 @@ class ArticleController extends Controller
     }
 
     public function circle_index($id){
-        $r =  get_circle_articles($id);
+        $r["articles"] =  get_circle_articles($id);
         $r["status_code"] = 666;
         return $r;
     }
     
     public function community_index($id){
-        $r = get_community_articles($id);
+        $r["articles"]= get_community_articles($id);
         $r["status_code"] = 666;
         return $r;
 

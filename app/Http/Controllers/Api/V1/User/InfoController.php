@@ -55,6 +55,7 @@ class InfoController extends Controller
             $info = \App\Community::find($com_id);
             $info["my_role"] = get_member_role($com["role"]);
             $info["type"] = "community";
+            $info["member_count"] = get_community_member_count($com_id);
             array_push($r1, $info);
         }
  
@@ -63,6 +64,7 @@ class InfoController extends Controller
             $info = \App\Circle::find($cir_id);
             $info["my_role"] = get_member_role($cir["role"]);
             $info["type"] = "circle";
+            $info["member_count"] = get_circle_member_count($cir_id);
             array_push($r2, $info);
  
         }

@@ -315,3 +315,45 @@ response :
             .....
             .....
 ```
+
+
+## 返回文章详情（带评论）
+
+GET /api/article/{id}
+
+NO TOKEN
+
+response
+
+```
+{
+    "status_code": 666,
+    "article": {
+        "id": 1,
+        "title": "title",
+        "body": "content",
+        "author_id": 2,
+        "type": "normal",
+        "likes": 8,
+        "created_at": "2018-06-12 18:46:32",
+        "updated_at": "2018-06-12 18:46:32"
+    },
+    "comments": [
+        {
+            "id": 1,
+            "title": "NA",
+            "body": "testxxxx",
+            "likes": 0,
+            "author_id": 1,
+            "object_type": "article",
+            "object_id": 1,
+            "created_at": "2018-06-13 14:06:43",
+            "updated_at": "2018-06-13 14:06:43",
+            "name": "test",
+            "user_icon": "http://xmyapi.io/images/1528896263.jpg"
+        },
+        {
+            "id": 2,
+            "title": "NA",
+            "body
+```

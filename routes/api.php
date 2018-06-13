@@ -71,6 +71,7 @@ $api->version('v1', function ($api) {
         $api->get('article/circle/{id}', 'Article\ArticleController@circle_index');
         $api->get('article/community/{id}', 'Article\ArticleController@community_index');
         $api->get('article/{id}/comments', 'Article\ArticleController@show_comments');
+        $api->get('article/{id}', 'Article\ArticleController@show');
 
 
         $api->group(['middleware' => 'api.auth', 'namespace' => 'Admin'], function ($api) {

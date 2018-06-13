@@ -144,6 +144,21 @@ class ArticleController extends Controller
 
     }
 
+    public function show($id){
+        $article = \App\Article::find($id);
+
+        if(!$article){
+            return $this->response->array(['status_code'=>501 , "message"=>"article doesn't exist"]);
+        }
+
+        $comments = get_article_comments($id);
+        $result['status_code']=666;
+        $result['article'] = $article;
+        $result['comments'] = $comments;
+        return $result;
+
+    }
+
     public function show_comments($id){
         $comments = get_article_comments($id);
         $result['status_code']=666;

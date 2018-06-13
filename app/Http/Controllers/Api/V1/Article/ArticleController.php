@@ -24,9 +24,7 @@ class ArticleController extends Controller
     public function index(){
         $articles = \DB::table("articles")->join("article_posts","articles.id","=","article_posts.article_id")
                                           ->join("users","users.id","=","articles.author_id")
-                                          ->join("photos","photos.owner_id","=","users.id")
-                                          ->where("photos.type","=","UserIcon")
-                                          ->select("articles.*","article_posts.owner_id","article_posts.owner_type","users.name as author_name","photos.file_name as user_icon")
+                                          ->select("articles.*","article_posts.owner_id","article_posts.owner_type","users.name as author_name","users.id as uid")
                                           ->orderBy("created_at","desc")
                                           ->get();
         foreach($articles as $i){
@@ -40,7 +38,7 @@ class ArticleController extends Controller
                                                           ->where("id","=",$i->owner_id)
                                                           ->first()->name;
             }
-            $i->user_icon = get_image_path($i->user_icon);
+            $i->user_icon = get_user_icon_path($i->uid);
 
 
         }

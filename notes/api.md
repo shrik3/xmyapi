@@ -357,3 +357,19 @@ response
             "title": "NA",
             "body
 ```
+
+## 获取用户发表/评论过的文章
+
+GET /api/user/footprints
+
+WITH TOKEN
+
+response:
+
+```
+{
+    "status_code": 666,
+    "commented": [],
+    "written": []
+}
+```

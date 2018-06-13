@@ -122,15 +122,13 @@ function get_circle_articles($id){
     $result = DB::table('article_posts')->join('articles','article_posts.article_id','=','articles.id')
                                         ->join("users","users.id","=","articles.author_id")
                                         ->join("circles","circles.id","=","article_posts.owner_id")
-                                        ->leftJoin("photos","photos.owner_id","=","users.id")
-                                        ->where("photos.type","=","UserIcon")
                                         ->where('article_posts.owner_type','=','circle')
                                         ->where('article_posts.owner_id','=',$id)
-                                        ->select('articles.*','article_posts.owner_id','article_posts.owner_type','users.name as author_name','photos.file_name as user_icon')
+                                        ->select('articles.*','users.id as uid','article_posts.owner_id','article_posts.owner_type','users.name as author_name','circles.name as owner_name')
                                         ->orderBy('created_at','desc')
                                         ->get();
     foreach($result as $r){
-        $r->user_icon = get_image_path($r->user_icon);
+        $r->user_icon = get_user_icon_path($r->uid);
     }
     return $result;
 }
@@ -140,15 +138,13 @@ function get_community_articles($id){
    $result = DB::table('article_posts')->join('articles','article_posts.article_id','=','articles.id')
                                         ->join("users","users.id","=","articles.author_id")
                                         ->join("communities","communities.id","=","article_posts.owner_id")
-                                        ->leftJoin("photos","photos.owner_id","=","users.id")
-                                        ->where("photos.type","=","UserIcon")
                                         ->where('article_posts.owner_type','=','community')
                                         ->where('article_posts.owner_id','=',$id)
-                                        ->select('articles.*','article_posts.owner_id','article_posts.owner_type','users.name as author_name','photos.file_name as user_icon','communities.name as owner_name')
+                                        ->select('articles.*','article_posts.owner_id','article_posts.owner_type','users.name as author_name','users.id as uid','communities.name as owner_name')
                                         ->orderBy('created_at','desc')
                                         ->get();
     foreach($result as $r){
-        $r->user_icon = get_image_path($r->user_icon);
+        $r->user_icon = get_user_icon_path($r->uid);
     }
     return $result;
 
@@ -163,8 +159,13 @@ function get_community_articles($id){
 
 
 function get_user_commented_articles($uid){
-    $articles = \DB::table("articles")->join("comments")
-                                      ->where("");
+    $articles = \DB::table("articles")->join("comments","comments.object_id","=","articles.id")
+                                      ->where("comments.object_type","=","article")
+                                      ->where("comments.author_id","=",$uid)
+                                      ->distinct()
+                                      ->get(['articles.id','articles.title','articles.created_at','articles.likes']);
+
+    return $articles;
 }
 
 

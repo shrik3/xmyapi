@@ -134,6 +134,11 @@ class InfoController extends Controller
     public function footprints(){
         $uid = Auth::user()->id;
         $written = get_user_written_articles($uid);
-        return $written;
+        $commented = get_user_commented_articles($uid);
+
+        $result['status_code'] = 666;
+        $result['commented'] = $commented;
+        $result['written'] = $written;
+        return $result;
     }
 }

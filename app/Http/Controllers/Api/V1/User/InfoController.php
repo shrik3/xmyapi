@@ -131,4 +131,9 @@ class InfoController extends Controller
             return $this->response->array(['status_code'=>666 , "message"=>"saved"]);
     }
     
+    public function footprints(){
+        $uid = Auth::user()->id;
+        $written = get_user_written_articles($uid);
+        return $written;
+    }
 }

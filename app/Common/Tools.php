@@ -151,3 +151,19 @@ function get_community_articles($id){
     //                                     ->get();
     // return $result;
 }
+
+
+function get_user_commented_articles($uid){
+    $articles = \DB::table("articles")->join("comments")
+                                      ->where("");
+}
+
+
+function get_user_written_articles($uid){
+    $articles = \DB::table("articles")->where("author_id","=",$uid)
+                                      ->select("id","title","created_at","likes")
+                                      ->orderBy("created_at","desc")
+                                      ->get();
+    return $articles;
+
+}

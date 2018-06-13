@@ -39,6 +39,7 @@ class ArticleController extends Controller
                                                           ->first()->name;
             }
             $i->user_icon = get_user_icon_path($i->uid);
+            $i->comments_count = get_article_comment_count($i->id);
 
 
         }
@@ -149,6 +150,7 @@ class ArticleController extends Controller
             return $this->response->array(['status_code'=>501 , "message"=>"article doesn't exist"]);
         }
 
+        $article->comments_count = get_article_comment_count($article->id);
         $comments = get_article_comments($id);
         $result['status_code']=666;
         $result['article'] = $article;

@@ -86,6 +86,14 @@ function get_article_comments($art_id){
     return $comments;
 }
 
+function get_article_comment_count($art_id){
+    $count = \DB::table('comments')->where('comments.object_type','=','article')
+                                   ->where('comments.object_id','=',$art_id)
+                                   ->count();
+    return $count;
+
+}
+
 function get_image_path($filename){
     $url = url('images/' . $filename);
     return $url;
@@ -129,6 +137,7 @@ function get_circle_articles($id){
                                         ->get();
     foreach($result as $r){
         $r->user_icon = get_user_icon_path($r->uid);
+        $r->comments_count = get_article_comment_count($r->id);
     }
     return $result;
 }
@@ -145,6 +154,7 @@ function get_community_articles($id){
                                         ->get();
     foreach($result as $r){
         $r->user_icon = get_user_icon_path($r->uid);
+        $r->comments_count = get_article_comment_count($r->id);
     }
     return $result;
 

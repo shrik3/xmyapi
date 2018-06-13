@@ -23,16 +23,20 @@ class ArticleController extends Controller
 
     public function index(){
         $list = \App\Article::orderBy("created_at",'desc')->get();
+        $list["status_code"] = 666;
         return $list;
     }
 
     public function circle_index($id){
-        return get_circle_articles($id);
-
+        $r =  get_circle_articles($id);
+        $r["status_code"] = 666;
+        return $r;
     }
     
     public function community_index($id){
-        return get_community_articles($id);
+        $r = get_community_articles($id);
+        $r["status_code"] = 666;
+        return $r;
 
     }
 

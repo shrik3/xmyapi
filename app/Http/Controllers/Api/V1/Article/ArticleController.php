@@ -14,6 +14,21 @@ class ArticleController extends Controller
     //
     use helpers;
 
+    public function index(){
+        $list = \App\Article::orderBy("created_at",'desc')->get();
+        return $list;
+    }
+
+    public function circle_index($id){
+        return get_circle_articles($id);
+
+    }
+    
+    public function community_index($id){
+        return get_community_articles($id);
+
+    }
+
     public function create(Request $request){
         $content = $request->getContent();
         // 检测是否为 json 数据

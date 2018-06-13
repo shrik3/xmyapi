@@ -26,7 +26,6 @@ $api->version('v1', function ($api) {
 
         $api->resource('community', 'CommunityController', ['only' => ['index', 'show']]);
         $api->resource('circle', 'Circle\CircleController', ['only' => ['index', 'show']]);
-        $api->resource('article', 'ArticleController', ['only' => ['index', 'show']]);
 
         $api->get('/article/{id}/comments', 'CommentController@show');
 
@@ -66,7 +65,10 @@ $api->version('v1', function ($api) {
             $api->post('/article/create',"ArticleController@create"); 
          });
  
- 
+        // some open api for article 
+        $api->get('article/index', 'Article\ArticleController@index');
+        $api->get('article/circle/{id}', 'Article\ArticleController@circle_index');
+        $api->get('article/community/{id}', 'Article\ArticleController@community_index');
 
 
         $api->group(['middleware' => 'api.auth', 'namespace' => 'Admin'], function ($api) {

@@ -102,6 +102,7 @@ class CircleController extends Controller
     }
 
     public function create(Request $request){
+        
         $content = $request->getContent();
         // 检测是否为 json 数据
         if (is_not_json($content)) {

@@ -94,3 +94,23 @@ function get_circle_user_role($user_id,$cir_id){
     }
     return $mem['role'];
 }
+
+function get_circle_articles($id){
+    $result = DB::table('article_posts')->join('articles','article_posts.article_id','=','articles.id')
+                                        ->where('article_posts.owner_type','=','circle')
+                                        ->where('article_posts.owner_id','=',$id)
+                                        ->select('articles.*')
+                                        ->orderBy('created_at','desc')
+                                        ->get();
+    return $result;
+}
+
+function get_community_articles($id){
+    $result = DB::table('article_posts')->join('articles','article_posts.article_id','=','articles.id')
+                                        ->where('article_posts.owner_type','=','community')
+                                        ->where('article_posts.owner_id','=',$id)
+                                        ->select('articles.*')
+                                        ->orderBy('created_at','desc')
+                                        ->get();
+    return $result;
+}

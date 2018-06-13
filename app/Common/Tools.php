@@ -64,7 +64,7 @@ function get_article_image_path($article_id) {
 
 function get_article_comments($art_id){
     $comments = \DB::table('comments')->join('users','users.id','=','comments.author_id')
-                                      ->join('photos','photos.owner_id','=','users.id')
+                                      ->leftJoin('photos','photos.owner_id','=','users.id')
                                       ->where('photos.type','=','UserIcon')
                                       ->where('comments.object_type','=','article')
                                       ->where('comments.object_id','=',$art_id)
@@ -112,8 +112,8 @@ function get_circle_user_role($user_id,$cir_id){
 function get_circle_articles($id){
     $result = DB::table('article_posts')->join('articles','article_posts.article_id','=','articles.id')
                                         ->join("users","users.id","=","articles.author_id")
-                                        ->join("photos","photos.owner_id","=","users.id")
                                         ->join("circles","circles.id","=","article_posts.owner_id")
+                                        ->leftJoin("photos","photos.owner_id","=","users.id")
                                         ->where("photos.type","=","UserIcon")
                                         ->where('article_posts.owner_type','=','circle')
                                         ->where('article_posts.owner_id','=',$id)
@@ -130,8 +130,8 @@ function get_community_articles($id){
 
    $result = DB::table('article_posts')->join('articles','article_posts.article_id','=','articles.id')
                                         ->join("users","users.id","=","articles.author_id")
-                                        ->join("photos","photos.owner_id","=","users.id")
                                         ->join("communities","communities.id","=","article_posts.owner_id")
+                                        ->leftJoin("photos","photos.owner_id","=","users.id")
                                         ->where("photos.type","=","UserIcon")
                                         ->where('article_posts.owner_type','=','community')
                                         ->where('article_posts.owner_id','=',$id)

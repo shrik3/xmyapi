@@ -110,7 +110,15 @@ class InfoController extends Controller
             'image'=> 'required|image|mimes:jpeg,png,jpt,gif,svg|max:2048',
         ]);
 
-        $newImage = new \App\Photo;
+        $newImage = \App\Photo::where("type","=","UserIcon")
+                                ->where("owner_id","=",$user_id)->first();
+        
+        
+        if(!$newImage){
+            $newImage = new \App\Photo;
+        }    
+        
+
         $newImage->title = "icon";
         $newImage->file_name = time().'.'.$request->image->getClientOriginalExtension();
         $newImage->type = "UserIcon";

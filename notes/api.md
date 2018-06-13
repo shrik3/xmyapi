@@ -240,3 +240,78 @@ TOKEN REQUIRED
 - GET /api/community/join/{id}
 
 - GET /api/circle/join/{id}
+
+## COMMENTS
+
+GET COMMENTS:
+
+GET  /api/article/{article_id}/comments
+
+NO TOKEN
+
+
+CREATE ARTICLE COMMENTS:
+
+POST WITH TOKEN:
+
+/api/article/comment
+
+json body:
+
+```
+{
+"article_id" : "1",
+"body" : "fff test"
+}
+```
+
+response :
+
+```
+{
+    "status_code": 666,
+    "comments": [
+        {
+            "id": 1,
+            "title": "NA",
+            "body": "testxxxx",
+            "likes": 0,
+            "author_id": 1,
+            "object_type": "article",
+            "object_id": 1,
+            "created_at": "2018-06-13 14:06:43",
+            "updated_at": "2018-06-13 14:06:43",
+            "name": "test",
+            "user_icon": "http://xmyapi.io/images/1528896263.jpg"
+        },
+        {
+            "id": 2,
+            "title": "NA",
+            "body": "fff test",
+            "likes": 0,
+            "author_id": 1,
+            "object_type": "article",
+            "object_id": 1,
+            "created_at": "2018-06-13 14:28:00",
+            "updated_at": "2018-06-13 14:28:00",
+            "name": "test",
+            "user_icon": "http://xmyapi.io/images/1528896263.jpg"
+        },
+        {
+            "id": 3,
+            "title": "NA",
+            "body": "fff test",
+            "likes": 0,
+            "author_id": 1,
+            "object_type": "article",
+            "object_id": 1,
+            "created_at": "2018-06-13 14:28:01",
+            "updated_at": "2018-06-13 14:28:01",
+            "name": "test",
+            "user_icon": "http://xmyapi.io/images/1528896263.jpg"
+        },
+        {
+            "id": 4 ....
+            .....
+            .....
+```

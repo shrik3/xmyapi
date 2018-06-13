@@ -21,7 +21,7 @@ class CommunityController extends Controller
         if(\App\Membership::select()->where("member_id","=",$user_id)
                                           ->where("community_id","=",$id)
                                           ->count()){
-                                              return "already a member";
+                                              return $this->response->array(['status_code'=>701 , "message"=>"already a member"]);
                                           }
         $r = new \App\Membership;
         $r->community_id = $id;
@@ -59,11 +59,18 @@ class CommunityController extends Controller
             // CORE CODE ...
 
 
+             $newImage = \App\Photo::where("type","=","CommunityIcon")
+                                ->where("owner_id","=",$com_id)->first();
+        
+        
+            if(!$newImage){
+                 $newImage = new \App\Photo;
+            }    
+        
             $this->validate($request, [
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
     
-            $newImage = new \App\Photo;
             $newImage->title = $request->get('name').'icon';
             $newImage->file_name = time().'.'.$request->image->getClientOriginalExtension();
             $newImage->type = 'CommunityIcon';

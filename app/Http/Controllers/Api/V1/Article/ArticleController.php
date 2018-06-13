@@ -113,4 +113,41 @@ class ArticleController extends Controller
 
 
     }
+
+    public function comment(Request $request){
+        $content = $request->getContent();
+        // 检测是否为 json 数据
+        if (is_not_json($content)) {
+            // $this->response->errorBadRequest('this is not json , fuck you');
+            return $this->response->array(['status_code'=>406 , "message"=>"this is not json"]);
+        }
+        // json 数据解码
+        $data = json_decode($content, true);
+        $body = $data["body"];
+        $article_id = $data["article_id"];
+        if(!\App\Article::find($article_id)){
+            return $this->response->array(['status_code'=>501 , "message"=>"article doesn't exist"]);
+        }
+        $user_id = Auth::user()->id;
+        $comment = new \App\Comment;
+        $comment->title = "NA";
+        $comment->body = $body;
+        $comment->likes = 0;
+        $comment->author_id = $user_id;
+        $comment->object_type = "article";
+        $comment->object_id = $article_id;
+
+        if(!$comment->save()){
+            return $this->response->array(['status_code'=>101 , "message"=>"failed to save"]);
+        }
+        return $this->response->array(['status_code'=>666 , "message"=>"success"]);
+
+    }
+
+    public function show_comments($id){
+        $comments = get_article_comments($id);
+        $result['status_code']=666;
+        $result['comments'] = $comments;
+        return $result;
+    }
 }

@@ -27,7 +27,6 @@ $api->version('v1', function ($api) {
         $api->resource('community', 'CommunityController', ['only' => ['index', 'show']]);
         $api->resource('circle', 'Circle\CircleController', ['only' => ['index', 'show']]);
 
-        $api->get('/article/{id}/comments', 'CommentController@show');
 
         // 用户相关
         $api->post('/user/register', 'UserController@register');
@@ -63,6 +62,7 @@ $api->version('v1', function ($api) {
 
         $api->group(['middleware' => 'api.auth', 'namespace' => 'Article'], function ($api){
             $api->post('/article/create',"ArticleController@create"); 
+            $api->post('/article/comment',"ArticleController@comment"); 
             $api->get('/article/like/{id}',"ArticleController@like"); 
          });
  
@@ -70,6 +70,7 @@ $api->version('v1', function ($api) {
         $api->get('article/index', 'Article\ArticleController@index');
         $api->get('article/circle/{id}', 'Article\ArticleController@circle_index');
         $api->get('article/community/{id}', 'Article\ArticleController@community_index');
+        $api->get('article/{id}/comments', 'Article\ArticleController@show_comments');
 
 
         $api->group(['middleware' => 'api.auth', 'namespace' => 'Admin'], function ($api) {

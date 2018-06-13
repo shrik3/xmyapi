@@ -19,9 +19,10 @@ class CreateCommentTable extends Migration
             $table->string('title');
             $table->text('body');
             $table->integer('likes');
-            $table->string('owner_type');
-            $table->integer('owner_id');
-            $table->integer('article_id');
+            $table->integer('author_id');
+
+            $table->string('object_type');
+            $table->integer('object_id');
             $table->timestamps();
         });
     }

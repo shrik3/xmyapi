@@ -49,13 +49,7 @@ function get_community_id($name) {
     return $id;
 
 }
-
-
-function get_comments($article_id) {
-    $result = \App\Comment::where('article_id', $article_id);
-    return $result;
-}
-
+ 
 function get_article_image_path($article_id) {
     $front_image = \App\Photo::select('file_name')
         ->where([
@@ -66,6 +60,21 @@ function get_article_image_path($article_id) {
     $url = url('images/' . $front_image['file_name']);
     return $url;
 
+}
+
+function get_article_comments($art_id){
+    $comments = \DB::table('comments')->join('users','users.id','=','comments.author_id')
+                                      ->join('photos','photos.owner_id','=','users.id')
+                                      ->where('photos.type','=','UserIcon')
+                                      ->where('comments.object_type','=','article')
+                                      ->where('comments.object_id','=',$art_id)
+                                      ->select("comments.*","users.name","photos.file_name as user_icon")
+                                      ->get();
+
+    foreach($comments as $c){
+        $c->user_icon = get_image_path($c->user_icon);
+    }
+    return $comments;
 }
 
 function get_image_path($filename){

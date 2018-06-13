@@ -21,7 +21,7 @@ class CircleController extends Controller
         if(\App\CircleMembership::select()->where("member_id","=",$user_id)
                                           ->where("circle_id","=",$id)
                                           ->count()){
-                                              return "already a member";
+                                              return $this->response->array(['status_code'=>701 , "message"=>"already a member"]);
                                           }
         $r = new \App\CircleMembership;
         $r->circle_id = $id;
@@ -83,8 +83,16 @@ class CircleController extends Controller
             $this->validate($request, [
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
-    
-            $newImage = new \App\Photo;
+                
+
+            $newImage = \App\Photo::where("type","=","CircleIcon")
+                                ->where("owner_id","=",$cir_id)->first();
+        
+        
+            if(!$newImage){
+                 $newImage = new \App\Photo;
+            }    
+
             $newImage->title = $request->get('name').'icon';
             $newImage->file_name = time().'.'.$request->image->getClientOriginalExtension();
             $newImage->type = 'CircleIcon';
@@ -102,7 +110,7 @@ class CircleController extends Controller
     }
 
     public function create(Request $request){
-        
+
         $content = $request->getContent();
         // 检测是否为 json 数据
         if (is_not_json($content)) {

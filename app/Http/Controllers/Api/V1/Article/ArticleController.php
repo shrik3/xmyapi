@@ -22,12 +22,30 @@ class ArticleController extends Controller
     }
 
     public function index(){
+        $articles = \DB::table("articles")->join("article_posts","articles.id","=","article_posts.article_id")
+                                          ->join("users","users.id","=","articles.author_id")
+                                          ->join("photos","photos.owner_id","=","users.id")
+                                          ->where("photos.type","=","UserIcon")
+                                          ->select("articles.*","article_posts.owner_id","article_posts.owner_type","users.name as author_name","photos.file_name as user_icon")
+                                          ->orderBy("created_at","desc")
+                                          ->get();
+        foreach($articles as $i){
+            if($i->owner_type=="community"){
+                $i->owner_name=\DB::table("communities")->select("name")
+                                                          ->where("id","=",$i->owner_id)
+                                                          ->first()->name;
+            }
+            if($i->owner_type=="circle"){
+                $i->owner_name=\DB::table("circles")->select("name")
+                                                          ->where("id","=",$i->owner_id)
+                                                          ->first()->name;
+            }
+            $i->user_icon = get_image_path($i->user_icon);
+
+
+        }
         $list["status_code"] = 666;
-        $list["articles"] = \DB::table("articles")->join("article_posts","articles.id","=","article_posts.article_id")
-                                      ->select("articles.*","article_posts.owner_id","article_posts.owner_type")
-                                      ->orderBy("created_at","desc")
-                                      ->get();
-        // $list = \App\Article::orderBy("created_at",'desc')->get();
+        $list["articles"]  = $articles;
         return $list;
     }
 

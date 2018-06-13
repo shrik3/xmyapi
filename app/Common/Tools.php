@@ -68,6 +68,11 @@ function get_article_image_path($article_id) {
 
 }
 
+function get_image_path($filename){
+    $url = url('images/' . $filename);
+    return $url;
+}
+
 function get_member_role($role_code){
     $list = [
         0 => "creator" ,
@@ -97,15 +102,38 @@ function get_circle_user_role($user_id,$cir_id){
 
 function get_circle_articles($id){
     $result = DB::table('article_posts')->join('articles','article_posts.article_id','=','articles.id')
+                                        ->join("users","users.id","=","articles.author_id")
+                                        ->join("photos","photos.owner_id","=","users.id")
+                                        ->join("circles","circles.id","=")
+                                        ->where("photos.type","=","UserIcon")
                                         ->where('article_posts.owner_type','=','circle')
                                         ->where('article_posts.owner_id','=',$id)
-                                        ->select('articles.*')
+                                        ->select('articles.*','article_posts.owner_id','article_posts.owner_type','users.name as author_name','photos.file_name as user_icon')
                                         ->orderBy('created_at','desc')
                                         ->get();
+    foreach($result as $r){
+        $r->user_icon = get_image_path($r->user_icon);
+    }
     return $result;
 }
 
 function get_community_articles($id){
+
+   $result = DB::table('article_posts')->join('articles','article_posts.article_id','=','articles.id')
+                                        ->join("users","users.id","=","articles.author_id")
+                                        ->join("photos","photos.owner_id","=","users.id")
+                                        ->join("communities","communities.id","=","article_posts.owner_id")
+                                        ->where("photos.type","=","UserIcon")
+                                        ->where('article_posts.owner_type','=','community')
+                                        ->where('article_posts.owner_id','=',$id)
+                                        ->select('articles.*','article_posts.owner_id','article_posts.owner_type','users.name as author_name','photos.file_name as user_icon','communities.name as owner_name')
+                                        ->orderBy('created_at','desc')
+                                        ->get();
+    foreach($result as $r){
+        $r->user_icon = get_image_path($r->user_icon);
+    }
+    return $result;
+
     $result = DB::table('article_posts')->join('articles','article_posts.article_id','=','articles.id')
                                         ->where('article_posts.owner_type','=','community')
                                         ->where('article_posts.owner_id','=',$id)

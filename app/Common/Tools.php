@@ -44,6 +44,17 @@ function get_circle_icon_path($circle_id) {
     return $url;
 }
 
+function get_user_icon_path($uid){
+    $icon = \App\Photo::select('file_name')
+    ->where([
+        'owner_id' => $uid,
+        'type' => 'UserIcon'
+    ])
+    ->first();
+    $url = url('images/' . $icon['file_name']);
+    return $url;
+}
+
 function get_community_id($name) {
     $id = \App\Community::select('id')->where(['name' => $name])->first()["id"];
     return $id;
@@ -64,15 +75,13 @@ function get_article_image_path($article_id) {
 
 function get_article_comments($art_id){
     $comments = \DB::table('comments')->join('users','users.id','=','comments.author_id')
-                                      ->leftJoin('photos','photos.owner_id','=','users.id')
-                                      ->where('photos.type','=','UserIcon')
                                       ->where('comments.object_type','=','article')
                                       ->where('comments.object_id','=',$art_id)
-                                      ->select("comments.*","users.name","photos.file_name as user_icon")
+                                      ->select("comments.*","users.name","users.id as uid")
                                       ->get();
 
     foreach($comments as $c){
-        $c->user_icon = get_image_path($c->user_icon);
+        $c->user_icon = get_user_icon_path($c->uid);
     }
     return $comments;
 }
